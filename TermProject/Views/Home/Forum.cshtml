@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TermProject.Models.ForumPost>
+@{
+    ViewData["Title"] = "Forum";
+    Layout = "_Layout";
+}
+
+<div class="panel-body">
+    <h2 class="text-center">Here is where you can write about your favorite animals, or just talking about animals you enjoy</h2>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Forum Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.ForumPost f in Model)
+            {
+                <tr>
+                    <td>@f.Title<br />
+                    @f.Text
+                    </td>
+                </tr>
+                @foreach (Response r in f.Responses)
+                {
+                    <tr>
+                        <td>
+                            @r.Comment
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Respond" asp-route-postTitle="@f.Title">Write a repy</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <a class="btn btn-success" asp-action="ForumPost">Create a post</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

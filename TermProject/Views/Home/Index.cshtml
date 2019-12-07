@@ -1,0 +1,145 @@
+﻿@model IEnumerable<TermProject.Models.Animal>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p class="text-center">This is a website where you can talk about your favorite animals, and in case the animal you like
+    isnt in the list you can add its name, description, and species.</p>
+</div>
+<div class="panel-body">
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Mammals</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Mammal")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Birds</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Bird")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Fish</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Fish")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Reptiles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Reptile")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Amphibians</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Amphibian")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table tavle-md text-md-left table-bordered">
+        <thead>
+            <tr>
+                <th>Arthropods</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TermProject.Models.Animal a in Model)
+            {
+                if (a.Class == "Arthropod")
+                {
+                    <tr>
+                        <td>
+                            Name: @a.Name<br />
+                            Description: @a.Description<br />
+                            Diet: @a.Diet
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

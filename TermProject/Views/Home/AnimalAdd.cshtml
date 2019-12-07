@@ -1,0 +1,41 @@
+﻿@model Animal
+@{
+    ViewData["Title"] = "Add Animal";
+    Layout = "_Layout";
+}
+
+<h2>Add an animal of your choice</h2>
+<form class="p-4" asp-controller="HomeController" asp-action="AnimalAdd" asp-antiforgery="true" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Class">Class:</label>
+        <select asp-for="Class">
+            <option value="Mammal">Mammal</option>
+            <option value="Bird">Bird</option>
+            <option value="Fish">Fish</option>
+            <option value="Reptile">Reptile</option>
+            <option value="Amphibian">Amphibian</option>
+            <option value="Arthropod">Arthropod</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Animal Name:</label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <input class="form-control" asp-for="Description" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Diet">Diet:</label>
+        <select asp-for="Diet">
+            <option value="Herbavore">Herbavore</option>
+            <option value="Carnivore">Carnivore</option>
+            <option value="Omnivore">Omnivore</option>
+        </select>
+    </div>
+    <div class="text-md-left">
+        <button class="btn btn-primary" type="submit">Add Animal</button>
+    </div>
+</form>
+

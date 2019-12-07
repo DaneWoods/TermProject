@@ -1,0 +1,21 @@
+﻿@model ForumPost
+@{
+    ViewData["Title"] = "ForumPost";
+    Layout = "_Layout";
+}
+<div class="panel-body">
+    <form class="p-4" asp-controller="HomeController" asp-action="ForumPost" asp-antiforgery="true" method="post">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Title">Subject:</label>
+            <input class="form-control" asp-for="Title" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Text">Text:</label>
+            <input class="form-control" asp-for="Text" />
+        </div>
+        <div class="text-md-left">
+            <button class="btn btn-primary" type="submit">Post</button>
+        </div>
+    </form>
+</div>

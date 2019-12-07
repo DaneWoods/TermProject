@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>@ViewData["Title"] - TermProject</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" asp-action="Index">Home</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a asp-action="AnimalAdd">Add Animal</a></li>
+                    <li><a asp-action="Forum">Forum Page</a></li>
+                    <li><a asp-action="Quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted text-center">
+        <div class="container">
+            &copy; 2019 - TermProject
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
