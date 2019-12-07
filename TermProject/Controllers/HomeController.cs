@@ -11,9 +11,16 @@ namespace TermProject.Controllers
 {
     public class HomeController : Controller
     {
+        IRepository repo;
+
+        public HomeController(IRepository r)
+        {
+            repo = r;
+        }
+
         public IActionResult Index()
         {
-            return View(Repositories.RealRepository.AnimalList);
+            return View(repo.AnimalList);
         }
 
         [HttpGet]
@@ -27,7 +34,7 @@ namespace TermProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Repositories.RealRepository.AddAnimal(a);
+                repo.AddAnimal(a);
                 return RedirectToAction("Index");
             }
             else
@@ -36,7 +43,7 @@ namespace TermProject.Controllers
 
         public IActionResult Forum()
         {
-            return View(Repositories.RealRepository.ForumList);
+            return View(repo.ForumList);
         }
 
         [HttpGet]
@@ -50,7 +57,7 @@ namespace TermProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Repositories.RealRepository.AddForumPost(f);
+                repo.AddForumPost(f);
                 return RedirectToAction("Forum");
             }
             else
@@ -70,7 +77,7 @@ namespace TermProject.Controllers
             ViewBag.PostTitle = postTitle;
             if (ModelState.IsValid)
             {
-                Repositories.RealRepository.AddForumPostResponse(postTitle, response);
+                repo.AddForumPostResponse(postTitle, response);
                 return RedirectToAction("Forum");
             }
             else
@@ -80,7 +87,7 @@ namespace TermProject.Controllers
         [HttpGet]
         public IActionResult Quiz()
         {
-            Animal rndAnimal = Repositories.RealRepository.GenerateQuestion();
+            Animal rndAnimal = repo.GenerateQuestion();
             ViewBag.AnimalName = rndAnimal.Name;
             ViewBag.RandomAnimalDesc = rndAnimal.Description;
             return View();
