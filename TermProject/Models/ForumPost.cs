@@ -8,7 +8,10 @@ namespace TermProject.Models
 {
     public class ForumPost
     {
-        public List<Response> resp = new List<Response>();
+        
+        private List<Response> resp = new List<Response>();
+        [Key]
+        public int PostID { get; set; }
         [Required(ErrorMessage = "Please input some text for your story")]
         public string Title{ get; set; }
         [Required(ErrorMessage = "Please input some text for your story")]

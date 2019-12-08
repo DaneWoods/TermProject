@@ -8,6 +8,8 @@ namespace TermProject.Models
 {
     public class Animal
     {
+        [Key]
+        public int AnimalID { get; set; }
         public string Class { get; set; }
         [Required(ErrorMessage = "Please input the name of the animal")]
         public string Name { get; set; }

@@ -29,7 +29,7 @@ namespace TermProject.Repositories
         {
             Response r = new Response();
             r.Comment = response;
-            ForumPosts.Find(x => x.Title == title).resp.Add(r);
+            ForumPosts.Find(x => x.Title == title).Responses.Add(r);
         }
 
         public Animal GenerateQuestion()

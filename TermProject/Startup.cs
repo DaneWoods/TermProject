@@ -9,14 +9,20 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using TermProject.Models;
+using TermProject.Repositories;
 
 namespace TermProject
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment environment;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            environment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -33,10 +39,23 @@ namespace TermProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTransient<IRepository, RealRepository>();
+
+            if (environment.IsDevelopment())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+                   Configuration["ConnectionStrings:SqlConnections"]));
+            }
+            else if (environment.IsProduction())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseMySql(
+                    Configuration["ConnectionStrings:SqlConnections"]));
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -53,12 +72,16 @@ namespace TermProject
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            context.Database.Migrate();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }

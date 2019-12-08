@@ -9,35 +9,41 @@ namespace TermProject.Repositories
 {
     public class RealRepository : IRepository
     {
-        public static List<ForumPost> ForumPosts = new List<ForumPost>();
-        public static List<Animal> Animals = new List<Animal>();
+        public AppDbContext context;
 
-        public List<Animal> AnimalList { get { return Animals; } }
+        public List<Animal> AnimalList { get { return context.Animals.ToList(); } }
+        public List<ForumPost> ForumList { get { return context.ForumPosts.Include(x => x.Responses).ToList(); } }
 
-        public List<ForumPost> ForumList { get { return ForumPosts; } }
+        public RealRepository(AppDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         public void AddAnimal(Animal a)
         {
-            Animals.Add(a);
+            context.Animals.Add(a);
+            context.SaveChanges();
         }
 
         public void AddForumPost(ForumPost f)
         {
-            ForumPosts.Add(f);
+            context.ForumPosts.Add(f);
+            context.SaveChanges();
         }
 
         public void AddForumPostResponse(string title, string response)
         {
             Response r = new Response();
             r.Comment = response;
-            ForumPosts.Find(x => x.Title == title).resp.Add(r);
+            context.ForumPosts.First(x => x.Title == title).Responses.Add(r);
+            context.SaveChanges();
         }
 
         public Animal GenerateQuestion()
         {
             Random rnd = new Random();
-            int rndAnimal = rnd.Next(0, Animals.Count);
-            return Animals[rndAnimal];
+            int rndAnimal = rnd.Next(0, AnimalList.Count);
+            return AnimalList[rndAnimal];
         }
     }
 }

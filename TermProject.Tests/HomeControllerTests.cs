@@ -37,7 +37,8 @@ namespace TermProject.Tests
             ForumPost f = new ForumPost { Title = "Wowie", Text = "Wowzers" };
             homeController.ForumPost(f);
             // Assert
-            Assert.Equal(f, repo.ForumList[0]);
+            Assert.Equal(f.Title, repo.ForumList[0].Title);
+            Assert.Equal(f.Text, repo.ForumList[0].Text);
         }
 
         [Fact]
@@ -52,7 +53,7 @@ namespace TermProject.Tests
             homeController.ForumPost(f);
             homeController.Respond(com, f.Title);
             // Assert
-            Assert.Equal(com, repo.ForumList[0].resp[0].Comment);
+            Assert.Equal(com, repo.ForumList[0].Responses[0].Comment);
         }
     }
 }
